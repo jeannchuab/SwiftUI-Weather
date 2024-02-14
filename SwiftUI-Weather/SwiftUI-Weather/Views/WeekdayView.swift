@@ -21,6 +21,9 @@ struct WeekdayView: View {
             
             VStack(spacing: 10) {
                 Image(systemName: iconName)
+                    /*iOS 15 introduced the .symbolRenderingMode(.palette), which can be used with .foregroundStyle(.red, .blue, .orange) or
+                     .symbolRenderingMode(.hierarchical) which can be used with .foregroundColor(.red)
+                     */
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)

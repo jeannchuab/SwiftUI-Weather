@@ -8,17 +8,32 @@
 import SwiftUI
 
 struct BackgroundView: View {
-    var topColor: Color
-    var bottomColor: Color
-    
+    // The @Binding allows that we change the value here and reflects throught the code.
+    // We are not changing the variable so the @Binding is not required.
+    @Binding var isNight: Bool
+            
     var body: some View {
+        
+        let topColor: Color = isNight ? .black : .blue
+        let bottomColor: Color = isNight ? .gray : Color("lightBlue")
+        
+        /**
+         
+         Introduced on iOS 16
+         ContainerRelativeShape()
+             .fill(isNight ? Color.black.gradient : Color.blue.gradient)
+         
+         */
+        
+        
+        
         LinearGradient(gradient: Gradient(colors: [topColor, bottomColor]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
-        .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea(.all)
     }
 }
 
 #Preview {
-    BackgroundView(topColor: Color.blue, bottomColor: Color("lightBlue"))
+    BackgroundView(isNight: .constant(false))
 }

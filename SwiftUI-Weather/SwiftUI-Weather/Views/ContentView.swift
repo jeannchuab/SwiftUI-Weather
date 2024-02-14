@@ -13,14 +13,14 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BackgroundView(topColor: isNight ? .black : .blue,
-                           bottomColor: isNight ? .gray : Color("lightBlue"))
+            BackgroundView(isNight: $isNight)
             
             VStack {
-                HeaderView(cityName: "Cupertino, CA", 
-                           imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
+                HeaderView(isNight: $isNight,
+                           cityName: "Cupertino, CA",
                            degrees: "22")
                                                 
+                //TODO: Get this info from a API
                 HStack {
                     WeekdayView(weekDayText: "MON", iconName: "sun.max.fill", degreesText: 32)
                     WeekdayView(weekDayText: "TUE", iconName: "cloud.fill", degreesText: 24)
@@ -32,7 +32,9 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    isNight.toggle()
+                    withAnimation(.easeInOut) {
+                        isNight.toggle()
+                    }
                 } label: {
                     Text("Change day time")
                         .frame(width: 280, height: 50)

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @Binding var isNight: Bool
     var cityName: String
-    var imageName: String
     var degrees: String
     
     var body: some View {
@@ -19,7 +19,7 @@ struct HeaderView: View {
             .padding()
                                         
         VStack(spacing: 10) {
-            Image(systemName: imageName)
+            Image(systemName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -34,5 +34,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(cityName: "Cupertino, CA", imageName: "cloud.sun.fill", degrees: "22")
+    HeaderView(isNight: .constant(false), cityName: "Cupertino, CA", degrees: "22")
 }
